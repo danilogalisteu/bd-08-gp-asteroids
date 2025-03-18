@@ -1,3 +1,5 @@
+import sys
+
 import pygame
 
 from asteroid import Asteroid
@@ -31,9 +33,14 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
-        screen.fill((0, 0, 0))
         updatable.update(dt)
 
+        for a in asteroids:
+            if player.check(a):
+                print("Game over!")
+                sys.exit()
+
+        screen.fill((0, 0, 0))
         for d in drawable:
             d.draw(screen)
 
