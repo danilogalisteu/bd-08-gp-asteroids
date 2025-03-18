@@ -46,7 +46,7 @@ def main():
             for s in shots:
                 if s.check(a):
                     s.kill()
-                    a.kill()
+                    a.split()
                     break
 
         screen.fill((0, 0, 0))
