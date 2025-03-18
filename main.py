@@ -43,6 +43,12 @@ def main():
                 print("Game over!")
                 sys.exit()
 
+            for s in shots:
+                if s.check(a):
+                    s.kill()
+                    a.kill()
+                    break
+
         screen.fill((0, 0, 0))
         for d in drawable:
             d.draw(screen)
