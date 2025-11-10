@@ -5,7 +5,7 @@ import pygame
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from constants import *
-from logger import log_state
+from logger import log_event, log_state
 from player import Player
 from shot import Shot
 
@@ -48,6 +48,7 @@ def main():
 
             for s in shots:
                 if s.check(a):
+                    log_event("asteroid_shot")
                     s.kill()
                     a.split()
                     break
