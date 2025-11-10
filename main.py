@@ -5,6 +5,7 @@ import pygame
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from constants import *
+from logger import log_state
 from player import Player
 from shot import Shot
 
@@ -32,6 +33,8 @@ def main():
     field = AsteroidField()
 
     while True:
+        log_state()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
