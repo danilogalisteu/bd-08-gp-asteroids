@@ -30,7 +30,7 @@ def main():
     Shot.containers = (shots, updatable, drawable)
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-    field = AsteroidField()
+    _field = AsteroidField()
 
     while True:
         log_state()
