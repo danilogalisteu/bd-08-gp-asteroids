@@ -3,7 +3,7 @@ import json
 import math
 from datetime import datetime
 
-__all__ = ["log_state"]
+__all__ = ["log_state", "log_event"]
 
 _FPS = 60
 _MAX_SECONDS = 16
@@ -11,6 +11,7 @@ _SPRITE_SAMPLE_LIMIT = 10  # Maximum number of sprites to log per group
 
 _frame_count = 0
 _state_log_initialized = False
+_event_log_initialized = False
 _start_time = datetime.now()
 
 
@@ -112,3 +113,23 @@ def log_state():
         f.write(json.dumps(entry) + "\n")
 
     _state_log_initialized = True
+
+
+def log_event(event_type, **details):
+    global _event_log_initialized
+
+    now = datetime.now()
+
+    event = {
+        "timestamp": now.strftime("%H:%M:%S.%f")[:-3],
+        "elapsed_s": math.floor((now - _start_time).total_seconds()),
+        "frame": _frame_count,
+        "type": event_type,
+        **details,
+    }
+
+    mode = "w" if not _event_log_initialized else "a"
+    with open("game_events.jsonl", mode) as f:
+        f.write(json.dumps(event) + "\n")
+
+    _event_log_initialized = True
